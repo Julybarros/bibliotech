@@ -35,13 +35,14 @@ export function Emprestimos() {
                                     <th>Livro</th>
                                     <th>Status</th>
                                     <th>Data de Empréstimo</th>
+                                    <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {emprestimos.map(emprestimo => {
                                     const dataEmprestimo = emprestimo.dataEmprestimo.toDate().toLocaleDateString('pt-br');
                                     return (
-                                        <tr>
+                                        <tr key={emprestimo.id}>
                                             <td>{emprestimo.leitor}</td>
                                             <td>{emprestimo.email}</td>
                                             <td>{emprestimo.telefone}</td>
@@ -50,6 +51,16 @@ export function Emprestimos() {
                                                 <Badge bg={emprestimo.status === "Pendente" ? "warning" : "success"}>{emprestimo.status}</Badge>
                                             </td>
                                             <td>{dataEmprestimo}</td>
+                                            <td>
+                                                <Button
+                                                    as={Link}
+                                                    to={`/emprestimos/editar/${emprestimo.id}`}
+                                                    variant="warning"
+                                                    size="sm"
+                                                >
+                                                    <i className="bi bi-pencil-fill"></i>
+                                                </Button>
+                                            </td>
                                         </tr>
                                     )
                                 })}
